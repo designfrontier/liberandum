@@ -2,15 +2,18 @@
 const libpostal = require('node-postal'),
       queryString = require('query-string'),
       Twilio = require('twilio'),
+      addUser = require('./addUser'),
       client = new Twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_ACCOUNT_TOKEN),
       { gremlin, gremlinConnection } = require('../shared/db.js'),
       { currentStep } = require('./step.js'),
       sorryMessage = 'We\'re sorry but Liberandum doesn\'t recognize this number. For details visit http://liberandum.org/about.',
+      addedUserMessage = 'We are adding them to our list of potential recipients and will reach out to them as funds become available. Thanks so much for helping.',
       messages = [
         'All right, first we need your full name',
         'Thanks, now we need your full address (street address, apartment/suite, city, state, and zipcode)',
-        'How many people live with you?',
+        'How many people in your home with you? (Not including you)',
         'Do you know anyone you could stay with outside the evacuation area?',
+        'Do you know anyone else who could use some help evacuating? If so what is there phone number?'
       ];
 
 module.exports = async (event, context) => {
@@ -83,6 +86,20 @@ module.exports = async (event, context) => {
         g.V(user.value.id)
          .property('household_size', parseInt(incoming.Body.trim(), 10))
          .next();
+        break;
+      case 4:
+        msg = messages[4];
+        g.V(user.value.id)
+         .property('has_place_to_stay', incoming.Body.trim().toLowerCase() === 'yes')
+         .next();
+        break;
+      case 5:
+        if (incoming.Body.trim().toLowerCase() !== 'no') {
+          msg = addedUserMessage;
+          addUser({body: JSON.stringify({ phone: incoming.Body.trim(), From: incoming.From })});
+        } else {
+          msg = 'Thanks! If you think of anyone later on please let us know';
+        }
         break;
       //TODO: handle optIn False for people who aren't interested
     }

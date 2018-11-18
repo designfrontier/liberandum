@@ -12,7 +12,7 @@ const currentStep = (user) => {
     return 2;
   }
 
-  if (typeof user.get('houseHold_size') === 'undefined') {
+  if (typeof user.get('household_size') === 'undefined') {
     return 3;
   }
 

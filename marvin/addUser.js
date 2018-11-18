@@ -25,8 +25,7 @@ const addUser = async (event, context) => {
                         .has('phone_number', suggestingPhone)
                         .toList();
 
-  console.log(event);
-  if (suggestor.length === 0 && true) {
+  if (suggestor.length === 0 && event.queryStringParameters && !event.queryStringParameters.bypass) {
     console.log(`unknown number ${suggestingPhone} tried to suggest ${phone}`);
     return {statusCode: 204};
   }
@@ -39,10 +38,12 @@ const addUser = async (event, context) => {
      .property('invited_by', suggestingPhone)
      .next();
 
-    //add edge
-    g.addE('invited')
-     .from(suggestor)
-     .to(p);
+    if (event.queryStringParameters && !event.queryStringParameters.bypass) {
+      //add edge
+      g.addE('invited')
+       .from(suggestor)
+       .to(p);
+    }
 
     client
       .messages
@@ -73,6 +74,4 @@ const addUser = async (event, context) => {
   return { statusCode: 204 };
 };
 
-module.exports = {
-  addUser
-};
+module.exports = addUser;
