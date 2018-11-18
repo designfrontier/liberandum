@@ -16,11 +16,11 @@
     "random-number-csprng": "^1.0.2",
     "serverless-dotenv-plugin": "^2.0.1",
     "serverless-localstack": "^0.3.1",
-    "twilio": "^3.23.1",
+    "twilio": "^3.24.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
     "ava": "^0.25.0",
-    "serverless-offline": "^3.28.0"
+    "serverless-offline": "^3.31.3"
   }
 }

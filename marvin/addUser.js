@@ -25,7 +25,8 @@ const addUser = async (event, context) => {
                         .has('phone_number', suggestingPhone)
                         .toList();
 
-  if (suggestor.length === 0) {
+  console.log(event);
+  if (suggestor.length === 0 && true) {
     console.log(`unknown number ${suggestingPhone} tried to suggest ${phone}`);
     return {statusCode: 204};
   }

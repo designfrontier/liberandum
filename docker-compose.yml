@@ -1,0 +1,52 @@
+version: '3'
+services:
+  # mqtt:
+  #   image: erlio/docker-vernemq
+  #   ports:
+  #     - "1883:1883"
+  neptune:
+    image: tinkerpop/gremlin-server
+    ports:
+      - 8182:8182
+    environment:
+      VIRTUAL_HOST: gremlin.docker
+      VIRTUAL_PORT: 8182
+  neptune-ui:
+    build:
+      context: ./gremlin-ui
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+        no_proxy: ${no_proxy}
+    ports:
+      - "8183:80"
+    depends_on:
+      - neptune
+    environment:
+      VIRTUAL_PORT: 8183
+      VIRTUAL_HOST: gremlin-ui.docker
+  # neptune-console:
+  #   image: tinkerpop/gremlin-console
+  #   ports:
+  #     - 
+  # localstack:
+  #   image: localstack/localstack
+  #   ports:
+
+  #     - "8080:8080"
+  #     - 4567-4578:4567-4578
+  #   environment:
+  #     LAMBDA_EXECUTOR: docker
+  #     DEBUG: LAMBDA
+  # heart-of-gold:
+  #   build: ./heart-of-gold
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     port: "3000"
+  # webapp:
+  #   build:
+  #     context: ./dir
+  #     dockerfile: Dockerfile-alternate
+  #     args:
+  #       buildno: 1

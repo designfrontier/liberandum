@@ -1,8 +1,4 @@
-'use strict';
-const { round } = require('./heart-of-gold');
-const { twilioHook, addUser } = require('./marvin');
-
-const hello = async (event, context) => {
+const errors = async (event, context) => {
   return {
     statusCode: 200,
     body: JSON.stringify({
@@ -15,9 +11,4 @@ const hello = async (event, context) => {
   // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
 
-module.exports = {
-  hello,
-  twilioHook,
-  "add-user": addUser,
-  'round': round
-};
+module.exports = errors;

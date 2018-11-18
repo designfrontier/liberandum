@@ -55,29 +55,29 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: /
-          method: get
-
   twilio-hook:
-    handler: handler.twilioHook
+    handler: marvin/index.twilioHook
     events:
       - http:
           path: /message-hook
           method: post
 
   add-user:
-    handler: handler.add-user
+    handler: marvin/index.addUser
     events:
       - http:
           path: /add-user
           method: post
 
+  twilio-errors:
+    handler: marvin/index.errors
+    events:
+      - http:
+          path: /errors
+          method: post
+
   round:
-    handler: handler.round
+    handler: heart-of-gold/index.round
     events:
       - http:
           path: /round
