@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "ava": "^0.25.0",
-    "serverless-offline": "^3.31.3"
+    "serverless-offline": "^3.31.3",
+    "serverless-offline-scheduler": "^0.3.5"
   }
 }

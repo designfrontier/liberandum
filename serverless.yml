@@ -97,7 +97,7 @@ functions:
 plugins:
   - serverless-offline
   - serverless-dotenv-plugin
-
+  - serverless-offline-scheduler
 
 custom:
   serverless-offline:
