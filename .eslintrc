@@ -1,0 +1,27 @@
+{
+  "env": {
+    "jest/globals": true
+  },
+  "extends": [
+    "semistandard",
+    "plugin:flowtype/recommended",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended",
+    "prettier/flowtype",
+    "prettier/standard"
+  ],
+  "parser": "babel-eslint",
+  "plugins": ["flowtype", "jest"],
+  "rules": {
+    "flowtype/require-valid-file-annotation": [
+      "error",
+      "always",
+      {
+        "annotationStyle": "line"
+      }
+    ],
+    "jest/no-disabled-tests": "error"
+  },
+  "settings": {
+  }
+}

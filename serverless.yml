@@ -82,7 +82,7 @@ functions:
       - http:
           path: /round
           method: post
-#    
+#
 #resources:
 #  Resources:
 #    NewResource:
@@ -95,10 +95,17 @@ functions:
 #       Value: "Some output value"
 
 plugins:
-  - serverless-offline
+  - serverless-webpack
   - serverless-dotenv-plugin
+  - serverless-offline
   - serverless-offline-scheduler
 
+package:
+  individually: true
+
 custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
   serverless-offline:
     port: 4201

@@ -1,21 +1,25 @@
-const crypto = require('crypto');
-const randomBetween = require('random-number-csprng');
+// @flow
+import type { Funds } from '../common-types/funds';
+import type { Person } from '../common-types/person';
 
-const weight = (person) => {
+const crypto = require('crypto');
+// const randomBetween = require('random-number-csprng');
+
+const weight = (person: Person): Array<Person> => {
   const rtn = [person];
 
-  for(let i = 0; i < person.value.get('household_size'); i++) {
+  for (let i = 0; i < person.value.get('household_size'); i++) {
     rtn.push(person);
   }
 
   return rtn;
 };
 
-const forgeBlock = (people, chain, funds) => {
+const forgeBlock = (people: Array<Person>, chain: any, funds: Funds) => {
   const hash = crypto.createHash('sha512');
   const newBlock = {
     people: people,
-    previous: chain.head && chain.head.hash || null,
+    previous: (chain.head && chain.head.hash) || null,
     created_at: new Date().getTime(),
     amount_total: funds.total,
     amount_per_person: funds.per_person
@@ -34,17 +38,18 @@ const forgeBlock = (people, chain, funds) => {
   return chain;
 };
 
-async function getAllPeople (users, gremlin) {
+async function getAllPeople(users: Array<Person>, gremlin: any) {
   const pArray = users.map(async user => {
-    const u = await gremlin.V(user.id)
-                     .valueMap()
-                     .next();
+    const u = await gremlin
+      .V(user.id)
+      .valueMap()
+      .next();
     u.id = user.id;
 
     return u;
   });
 
-  return await Promise.all(pArray);
+  return Promise.all(pArray);
 }
 
 module.exports = {

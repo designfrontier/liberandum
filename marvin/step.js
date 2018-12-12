@@ -1,4 +1,5 @@
-const currentStep = (user) => {
+// @flow
+const currentStep = user => {
   console.log(user);
   if (typeof user.get('opt_in') === 'undefined') {
     return 0;

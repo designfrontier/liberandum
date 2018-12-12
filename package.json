@@ -4,11 +4,21 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "eslint": "eslint .",
+    "flow": "flow check",
+    "jest": "jest",
+    "pretest": "eslint . && flow check",
+    "prettier": "prettier src/**/*.js",
+    "prettier:write": "prettier --write heart-of-gold/**/*.js marvin/**/*.js shared/**/*.js common-types/**/*.js",
+    "pythia": "pythia --publish",
+    "test": "jest",
+    "test:watch": "npm run jest -- --watch",
+    "local": "ndb sls offline start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/runtime": "^7.1.5",
     "dotenv": "^6.1.0",
     "gremlin": "^3.3.4",
     "node-postal": "^1.0.0",
@@ -20,8 +30,49 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/plugin-transform-flow-strip-types": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-flow": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "eslint": "^5.9.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-semistandard": "^13.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-flowtype": "^3.2.0",
+    "eslint-plugin-format-message": "^6.2.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.0.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "flow-aws-lambda": "^1.0.4",
+    "flow-bin": "^0.87.0",
+    "husky": "^1.1.4",
+    "jest": "^23.6.0",
+    "ndb": "^1.0.42",
+    "prettier": "1.15.2",
+    "pretty-quick": "^1.8.0",
+    "semistandard-prettier-eslint": "^1.0.2",
+    "serverless-dotenv-plugin": "^2.0.1",
     "serverless-offline": "^3.31.3",
-    "serverless-offline-scheduler": "^0.3.5"
+    "serverless-offline-scheduler": "^0.3.5",
+    "serverless-webpack": "^5.2.0",
+    "webpack": "^4.25.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "engines": {
+    "npm": "5.6.0",
+    "node": "8.10.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

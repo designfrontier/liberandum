@@ -6,3 +6,10 @@ jspm_packages
 .serverless
 
 .env
+.env.development.local
+
+# Webpack directory
+.webpack
+
+# Code Coverage Reports
+coverage
