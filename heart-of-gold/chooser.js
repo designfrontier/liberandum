@@ -1,8 +1,9 @@
 // @flow
+import type { Person } from '../common-types/person';
 
 const randomBetween = require('random-number-csprng');
 
-const choose = async (pool, count: number) => {
+const choose = async (pool: Array<Person>, count: number) => {
   const chosen = [];
   let thePool = pool.map(i => i);
 

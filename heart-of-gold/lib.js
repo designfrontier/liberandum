@@ -1,6 +1,7 @@
 // @flow
 import type { Funds } from '../common-types/funds';
 import type { Person } from '../common-types/person';
+import type { Chain } from '../common-types/block';
 
 const crypto = require('crypto');
 // const randomBetween = require('random-number-csprng');
@@ -15,25 +16,30 @@ const weight = (person: Person): Array<Person> => {
   return rtn;
 };
 
-const forgeBlock = (people: Array<Person>, chain: any, funds: Funds) => {
+const forgeBlock = (
+  people: Array<Person>,
+  chain: Chain,
+  funds: Funds
+): Chain => {
   const hash = crypto.createHash('sha512');
   const newBlock = {
     people: people,
-    previous: (chain.head && chain.head.hash) || null,
+    previous: (chain.head && chain.head.signature) || null,
     created_at: new Date().getTime(),
     amount_total: funds.total,
-    amount_per_person: funds.per_person
+    amount_per_person: funds.per_person,
+    signature: ''
   };
 
   hash.update(JSON.stringify(newBlock));
-  newBlock.hash = hash.digest('hex');
+  newBlock.signature = hash.digest('hex');
 
   if (chain.head === null) {
     chain.tail = newBlock;
   }
 
   chain.head = newBlock;
-  chain[newBlock.hash] = newBlock;
+  chain[newBlock.signature] = newBlock;
 
   return chain;
 };

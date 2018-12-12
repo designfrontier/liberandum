@@ -1,5 +1,7 @@
 // @flow
-const currentStep = user => {
+import type { User } from '../common-types/person';
+
+const currentStep = (user: User) => {
   console.log(user);
   if (typeof user.get('opt_in') === 'undefined') {
     return 0;
