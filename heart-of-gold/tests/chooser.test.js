@@ -1,17 +1,23 @@
 // @flow
+import type { User } from '../../common-types/person';
 
 const { choose } = require('../chooser.js');
+const user: User = {
+  uuid: 'its-unique-ish',
+  phone_number: '12345678900',
+  get: () => {}
+};
 const arr = [
-  { id: 1 },
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 5 },
-  { id: 6 },
-  { id: 6 },
-  { id: 5 },
-  { id: 5 }
+  { id: '1', value: user },
+  { id: '1', value: user },
+  { id: '2', value: user },
+  { id: '3', value: user },
+  { id: '4', value: user },
+  { id: '5', value: user },
+  { id: '6', value: user },
+  { id: '6', value: user },
+  { id: '5', value: user },
+  { id: '5', value: user }
 ];
 
 test('should select n number of items where n is passed in', async () => {

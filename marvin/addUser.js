@@ -13,7 +13,10 @@ const client = new Twilio(
 const message =
   'You have been invited to liberandum! \n We are working to help people get out of the disaster zone. In order to setup your account we need to ask you a few questions. If interested please respond with YES';
 
-const addUser = async (event: APIGatewayEvent, context?: Context): Response => {
+const addUser = async (
+  event: APIGatewayEvent | { body: string },
+  context?: Context
+): Response => {
   const body = event.body ? JSON.parse(event.body) : {};
   const phone = body.phone;
   const suggestingPhone = body.From;
@@ -87,4 +90,11 @@ const addUser = async (event: APIGatewayEvent, context?: Context): Response => {
   return { statusCode: 204 };
 };
 
-module.exports = addUser;
+const addUserRoute = async (
+  event: APIGatewayEvent,
+  context?: Context
+): Response => {
+  return addUser(event);
+};
+
+module.exports = addUserRoute;
