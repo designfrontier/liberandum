@@ -9,16 +9,16 @@ help people who can't afford it evacuate anyway.
 
 0. Clone this repo
 1. run `npm i` in the cloned directory
-2. go up a directory
-3. clone [gremlin-local](https://github.com/designfrontier/gremlin-local)
-4. install [serverless](https://serverless.com/) `npm i -g serverless`
-5. install [dory](https://github.com/FreedomBen/dory) `gem install dory`
-6. install [ngrok](https://ngrok.com/)
-7. run ngrok
-8. configure twillio or get Daniel to configure it for you
-9. run gremlin-local with docker-compose
-10. get the tokens from Daniel for local development
-11. in the liberandum directory run serverless `serverless offline start`
+1. go up a directory
+1. clone [gremlin-local](https://github.com/designfrontier/gremlin-local)
+1. install [serverless](https://serverless.com/) `npm i -g serverless`
+1. install [dory](https://github.com/FreedomBen/dory) `gem install dory`
+1. install [ngrok](https://ngrok.com/)
+1. run ngrok
+1. configure twillio or get Daniel to configure it for you
+1. run gremlin-local with docker-compose
+1. get the tokens from Daniel for local development
+1. in the liberandum directory run serverless `serverless offline start`
 
 ## The Stack™
 
@@ -46,3 +46,22 @@ editor then that's something we can add.
 For ease of debugging there is also the lovely `npm run local` script that provides
 `ndb` wrapped serverless offline. That way you get a chrome-debugger in place for
 quick and easy inline debugging!
+
+### Example .env.yml file
+
+```
+dev:
+  STAGE: dev
+  # SERVER SETTINGS
+  PORT: 4201
+  HOST: https://a0f3a71a.ngrok.io
+
+  # TWILIO ACCOUNT SETTINGS
+  TWILIO_ACCOUNT_SID: <twilio-sid>
+  TWILIO_ACCOUNT_TOKEN: <twilio-token>
+  TWILIO_ACCOUNT_NUMBER: '+13853360288'
+
+  # GREMLIN
+  GREMLIN_URI: ws://gremlin.docker:8182
+
+```
