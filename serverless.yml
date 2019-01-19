@@ -20,6 +20,9 @@ service: liberandum # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs8.10
+  # TODO this will need to be modified with more environments
+  environment: ${file(.env.yml):dev}
+  stage: ${provider.environment.stage}
 
 # you can overwrite defaults here
 #  stage: dev
@@ -82,7 +85,7 @@ functions:
       - http:
           path: /round
           method: post
-#    
+#
 #resources:
 #  Resources:
 #    NewResource:
@@ -95,10 +98,16 @@ functions:
 #       Value: "Some output value"
 
 plugins:
+  - serverless-webpack
   - serverless-offline
-  - serverless-dotenv-plugin
+  - serverless-offline-scheduler
 
+package:
+  individually: true
 
 custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
   serverless-offline:
     port: 4201

@@ -4,23 +4,73 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "eslint": "eslint .",
+    "flow": "flow check",
+    "jest": "jest",
+    "pretest": "eslint . && flow check",
+    "prettier": "prettier src/**/*.js",
+    "prettier:write": "prettier --write heart-of-gold/**/*.js marvin/**/*.js shared/**/*.js common-types/**/*.js",
+    "pythia": "pythia --publish",
+    "test": "npm run jest",
+    "test:watch": "npm run jest -- --watch",
+    "local": "ndb sls offline start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^6.1.0",
-    "gremlin": "^3.3.4",
+    "@babel/runtime": "^7.2.0",
+    "gremlin": "^3.4.0",
     "node-postal": "^1.0.0",
     "query-string": "^6.2.0",
     "random-number-csprng": "^1.0.2",
-    "serverless-dotenv-plugin": "^2.0.1",
     "serverless-localstack": "^0.3.1",
-    "twilio": "^3.24.0",
+    "twilio": "^3.27.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
-    "serverless-offline": "^3.31.3"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-flow-strip-types": "^7.2.3",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-flow": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^3.5.0",
+    "eslint-config-semistandard": "^13.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-flowtype": "^3.2.1",
+    "eslint-plugin-format-message": "^6.2.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.3",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "flow-aws-lambda": "^1.0.4",
+    "flow-bin": "^0.91.0",
+    "husky": "^1.3.1",
+    "jest": "^23.6.0",
+    "ndb": "^1.0.42",
+    "prettier": "1.15.3",
+    "pretty-quick": "^1.10.0",
+    "semistandard-prettier-eslint": "^1.0.2",
+    "serverless-offline": "^4.1.4",
+    "serverless-offline-kinesis": "^1.5.0",
+    "serverless-offline-scheduler": "^0.3.7",
+    "serverless-webpack": "^5.2.0",
+    "webpack": "^4.28.4",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "engines": {
+    "npm": "5.6.0",
+    "node": "8.10.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

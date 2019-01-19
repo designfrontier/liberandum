@@ -1,10 +1,13 @@
+// @flow
+import type { Person } from '../common-types/person';
+
 const randomBetween = require('random-number-csprng');
 
-const choose = async (pool, count) => {
+const choose = async (pool: Array<Person>, count: number) => {
   const chosen = [];
   let thePool = pool.map(i => i);
 
-  for(let i = 0; i < count; i++) {
+  for (let i = 0; i < count; i++) {
     if (thePool.length === 0) {
       break;
     }
@@ -24,7 +27,6 @@ const choose = async (pool, count) => {
 
   return chosen;
 };
-
 
 module.exports = {
   choose
