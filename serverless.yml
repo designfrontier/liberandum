@@ -20,6 +20,9 @@ service: liberandum # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs8.10
+  # TODO this will need to be modified with more environments
+  environment: ${file(.env.yml):dev}
+  stage: ${provider.environment.stage}
 
 # you can overwrite defaults here
 #  stage: dev
@@ -96,7 +99,6 @@ functions:
 
 plugins:
   - serverless-webpack
-  - serverless-dotenv-plugin
   - serverless-offline
   - serverless-offline-scheduler
 

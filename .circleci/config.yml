@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  lint:
+    docker:
+      - image: node:8.10
+    steps:
+      - checkout
+      - run: npm i
+      - run: npm run eslint; npm run flow
+  test:
+    docker:
+      - image: node:8.10
+    steps:
+      - checkout
+      - run: npm i
+      - run: npm run jest
+workflows:
+  version: 2
+  lint_and_test:
+    jobs:
+      - lint
+      - test
